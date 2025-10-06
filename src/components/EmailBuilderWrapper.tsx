@@ -65,13 +65,14 @@ export default function EmailEditorWrapper() {
     });
   }, []);
 
+  // Handle editor load
   const handleEditorLoad = () => {
     console.log("Unlayer loaded...");
-    
-    //custom background color
     if (editorRef.current?.editor) {
       editorRef.current.editor.loadBlank({
-        backgroundColor: '#e7e7e7',
+        backgroundColor: '#f8deefff',
+        contentWidth: '600px',
+        linkColor: '#7C3AED',  
       });
     }
   };
@@ -107,7 +108,7 @@ export default function EmailEditorWrapper() {
           onClick={handleSaveTemplate}
           style={{
             padding: "8px 16px",
-            backgroundColor: "#10b981",
+            backgroundColor: "#8B5CF6",
             color: "white",
             border: "none",
             borderRadius: "4px",
@@ -128,31 +129,42 @@ export default function EmailEditorWrapper() {
               theme: "light",
               panels: {
                 tools: {
-                  dock: "left", 
+                  dock: "left",
                 },
               },
             },
-            tabs: {
+            tabs: {     // Custom tab icons
               content: {
-                icon: 'fa-file-text-o',  
+                icon: 'fa-file-text-o',
               },
               blocks: {
-                icon: 'fa-th-large', 
+                icon: 'fa-th-large',
               },
               body: {
-                icon: 'fa-cog',      
+                icon: 'fa-cog',
               },
             },
             features: {
-              undoRedo: true, 
+              undoRedo: true,
               imageEditor: {
-                enabled: false, 
+                enabled: false,
               },
-              stockImages: true,
             },
             tools: {
               menu: {
-                enabled: false, 
+                enabled: false,
+              },
+              button: {
+                properties: {
+                  buttonColors: {
+                    value: {
+                      color: '#FFFFFF',
+                      backgroundColor: '#086218ff',
+                      hoverColor: '#FFFFFF',
+                      hoverBackgroundColor: '#b9e03aff',
+                    },
+                  },
+                },
               },
             },
             mergeTags: [
