@@ -65,6 +65,7 @@ export default function EmailEditorWrapper() {
     });
   }, []);
 
+  // Save design JSON to backend
   const handleSaveTemplate = () => {
     if (!editorRef.current) return;
 
@@ -113,31 +114,27 @@ export default function EmailEditorWrapper() {
             console.log("Unlayer loaded with custom fonts, uploads, and merge tags");
           }}
           options={{
-            projectId: 648131,
             fonts: fontsConfig,
             appearance: {
               theme: "light",
               panels: {
                 tools: {
-                  dock: "right", 
+                  dock: "left", 
                 },
               },
             },
             features: {
-              undoRedo: true, //undo/redo 
-              userUploads: {
-                enabled: true,
-              },
+              undoRedo: true, 
               imageEditor: {
-                enabled: true, // image editor
+                enabled: false, 
               },
               stockImages: true,
             },
             tools: {
               menu: {
-                enabled: false, // menu tool
+                enabled: false, 
               },
-            },  
+            },
             mergeTags: [
               {
                 name: "First Name",
