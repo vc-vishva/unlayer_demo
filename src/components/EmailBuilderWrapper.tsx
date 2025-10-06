@@ -139,6 +139,9 @@ export default function EmailEditorWrapper() {
               blocks: {
                 icon: 'fa-th-large', 
               },
+              body: {
+                icon: 'fa-cog',      
+              },
             },
             features: {
               undoRedo: true, 
