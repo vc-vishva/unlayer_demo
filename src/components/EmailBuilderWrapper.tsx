@@ -2,12 +2,11 @@ import React, { useEffect, useRef } from "react";
 import EmailEditor from "react-email-editor";
 import axios from "axios";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5001";
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000";
 
 const fontsConfig = {
   showDefaultFonts: true,
   customFonts: [
-    // Define 5 custom Google Fonts
     {
       label: "Lobster",
       value: "'Lobster', cursive",
@@ -47,16 +46,15 @@ const fontsConfig = {
         { label: "Bold", value: 700 },
       ],
     },
-  ]
+  ],
 };
 
 export default function EmailEditorWrapper() {
   const editorRef = useRef<any>(null);
 
-  // Preload font CSS links so fonts render correctly inside editor
+  // Preload font CSS links
   useEffect(() => {
     const fontUrls = fontsConfig.customFonts.map((f: any) => f.url).filter(Boolean) as string[];
-
     fontUrls.forEach((url) => {
       if (!document.querySelector(`link[href="${url}"]`)) {
         const link = document.createElement("link");
@@ -67,15 +65,11 @@ export default function EmailEditorWrapper() {
     });
   }, []);
 
-  // Save design JSON to backend
   const handleSaveTemplate = () => {
     if (!editorRef.current) return;
 
     editorRef.current.editor.exportHtml(
       async (data: { design: any; html: string }) => {
-        // Log the pure minified HTML
-        console.log("Pure HTML:", data.html);
-
         const payload = {
           name: "Template " + new Date().toISOString(),
           design: data.design,
@@ -90,7 +84,7 @@ export default function EmailEditorWrapper() {
           alert("Save failed - see console");
         }
       },
-      { minify: true } // This removes \n and unnecessary whitespace
+      { minify: true }
     );
   };
 
@@ -116,23 +110,44 @@ export default function EmailEditorWrapper() {
         <EmailEditor
           ref={editorRef}
           onLoad={() => {
-            console.log("Unlayer loaded with custom fonts");
-            // Optional: force-register fonts via API after load (advanced)
-            // if (editorRef.current?.editor?.registerFont) {
-            //   fontsConfig.customFonts.forEach((f: any) => {
-            //     if (f.url) {
-            //       editorRef.current.editor.registerFont({
-            //         name: f.label,
-            //         url: f.url,
-            //         family: f.value,
-            //       });
-            //     }
-            //   });
-            // }
+            console.log("Unlayer loaded with custom fonts, uploads, and merge tags");
           }}
           options={{
-            // projectId: '',
+            projectId: 648131,
             fonts: fontsConfig,
+            appearance: {
+              theme: "light",
+              panels: {
+                tools: {
+                  dock: "right", 
+                },
+              },
+            },
+            features: {
+              undoRedo: true, //undo/redo 
+              userUploads: {
+                enabled: true,
+              },
+              imageEditor: {
+                enabled: true, // image editor
+              },
+              stockImages: true,
+            },
+            tools: {
+              menu: {
+                enabled: false, // menu tool
+              },
+            },  
+            mergeTags: [
+              {
+                name: "First Name",
+                value: "{{firstname}}",
+              },
+              {
+                name: "Last Name",
+                value: "{{lastname}}",
+              },
+            ],
           }}
         />
       </div>

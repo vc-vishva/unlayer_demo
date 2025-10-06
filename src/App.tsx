@@ -1,6 +1,7 @@
 import React from "react";
 import UnlayerEditor from './components/EmailBuilderWrapper';
 
+
 function App() {
   return (
     <div>
@@ -9,5 +10,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
