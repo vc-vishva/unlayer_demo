@@ -65,6 +65,17 @@ export default function EmailEditorWrapper() {
     });
   }, []);
 
+  const handleEditorLoad = () => {
+    console.log("Unlayer loaded...");
+    
+    //custom background color
+    if (editorRef.current?.editor) {
+      editorRef.current.editor.loadBlank({
+        backgroundColor: '#e7e7e7',
+      });
+    }
+  };
+
   // Save design JSON to backend
   const handleSaveTemplate = () => {
     if (!editorRef.current) return;
@@ -110,9 +121,7 @@ export default function EmailEditorWrapper() {
       <div style={{ height: 700 }}>
         <EmailEditor
           ref={editorRef}
-          onLoad={() => {
-            console.log("Unlayer loaded with custom fonts, uploads, and merge tags");
-          }}
+          onLoad={handleEditorLoad}
           options={{
             fonts: fontsConfig,
             appearance: {
@@ -121,6 +130,14 @@ export default function EmailEditorWrapper() {
                 tools: {
                   dock: "left", 
                 },
+              },
+            },
+            tabs: {
+              content: {
+                icon: 'fa-file-text-o',  
+              },
+              blocks: {
+                icon: 'fa-th-large', 
               },
             },
             features: {
