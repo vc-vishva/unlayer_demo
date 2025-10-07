@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import EmailEditor from "react-email-editor";
 import axios from "axios";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5000";
+const API_BASE = import.meta.env.VITE_API_BASE;
 
 const fontsConfig = {
   showDefaultFonts: true,
