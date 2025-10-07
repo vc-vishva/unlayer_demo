@@ -1,15 +1,14 @@
+POC – Template Design
 
+Features:
 
-## What technologies are used for this project?
+🎨 Drag-and-drop WYSIWYG template editor
+🧱 Custom blocks and components
+💾 Save and load templates from backend
+📤 Export template HTML/JSON
+🧑‍💻 Developer-friendly configuration
+🪶 Lightweight and responsive design
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-
-VITE_API_BASE_URL=http://${local IP}:5000/api
-
+Setup:
+1. npm install
+2. npm run dev
