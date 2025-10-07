@@ -19,4 +19,5 @@ This project is a **Proof of Concept (POC)** for implementing a **drag-and-drop 
 
 1. Install dependencies:
    npm install
+2. run command   
    npm run dev
